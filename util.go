@@ -40,3 +40,17 @@ func isPrime(x int) bool {
 	}
 	return true
 }
+
+func Pow(x, y int) int {
+	z := 1
+	for y > 0 {
+		if y%2 == 0 {
+			x *= x
+			y /= 2
+		} else {
+			z *= x
+			y -= 1
+		}
+	}
+	return z
+}

@@ -14,8 +14,8 @@ func exec(stdin *Stdin, stdout *Stdout) {
 
 func main() {
 	stdout := NewStdout()
+	defer stdout.Flush()
 	exec(NewStdin(bufio.ScanWords), stdout)
-	stdout.Flush()
 }
 
 type Stdin struct {

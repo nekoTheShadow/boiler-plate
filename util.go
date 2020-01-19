@@ -54,3 +54,19 @@ func Pow(x, y int) int {
 	}
 	return z
 }
+
+func Gcd(x, y int) int {
+	if x < y {
+		x, y = y, x
+	}
+
+	for y > 0 {
+		x, y = y, x%y
+	}
+
+	return x
+}
+
+func Lcm(x, y int) int {
+	return x * y / Gcd(x, y) % MOD
+}

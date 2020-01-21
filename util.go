@@ -68,5 +68,5 @@ func Gcd(x, y int) int {
 }
 
 func Lcm(x, y int) int {
-	return x * y / Gcd(x, y) % MOD
+	return x * y / Gcd(x, y)
 }

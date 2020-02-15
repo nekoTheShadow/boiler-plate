@@ -34,3 +34,11 @@ func (d *Deque) PopFirst() interface{} {
 func (d *Deque) IsEmpty() bool {
 	return len(d.deque) == 0
 }
+
+func (d *Deque) PeekFirst() interface{} {
+	return d.deque[0]
+}
+
+func (d *Deque) PeekLast() interface{} {
+	return d.deque[len(d.deque)-1]
+}

@@ -44,3 +44,18 @@ func TestForQueue(t *testing.T) {
 		}
 	}
 }
+
+func TestPeekFunctions(t *testing.T) {
+	d := NewDeque()
+	d.AppendLast(1)
+	d.AppendLast(2)
+	d.AppendLast(3)
+
+	if d.PeekFirst() != 1 {
+		t.FailNow()
+	}
+
+	if d.PeekLast() != 3 {
+		t.FailNow()
+	}
+}

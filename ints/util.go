@@ -1,4 +1,4 @@
-package main
+package ints
 
 func Min(a ...int) int {
 	v := a[0]

@@ -1,4 +1,4 @@
-package main
+package mods
 
 const MOD = 1000000007
 

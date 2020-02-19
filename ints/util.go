@@ -70,3 +70,11 @@ func Gcd(x, y int) int {
 func Lcm(x, y int) int {
 	return x * y / Gcd(x, y)
 }
+
+func CeilDiv(x, y int) int {
+	if x%y == 0 {
+		return x / y
+	} else {
+		return x/y + 1
+	}
+}

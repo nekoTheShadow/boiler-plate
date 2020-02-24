@@ -32,3 +32,13 @@ func C(n, r int) int {
 func H(n, r int) int {
 	return C(n+r-1, r)
 }
+
+func NoCacheC(n, r int) int {
+	numer := 1
+	denom := 1
+	for i := 0; i < r; i++ {
+		numer = numer * (n - i) % MOD
+		denom = denom * (i + 1) % MOD
+	}
+	return numer * ModInv(denom) % MOD
+}

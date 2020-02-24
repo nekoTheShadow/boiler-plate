@@ -28,3 +28,7 @@ func C(n, r int) int {
 	}
 	return FCT[n] * (ModInv(FCT[n-r]) * ModInv(FCT[r]) % MOD) % MOD
 }
+
+func H(n, r int) int {
+	return C(n+r-1, r)
+}

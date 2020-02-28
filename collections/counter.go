@@ -6,9 +6,20 @@ func NewCounter() *Counter {
 	return &Counter{}
 }
 
-func (c *Counter) Increment(key interface{}) {
+func (c *Counter) put(key interface{}, v int) {
 	d := map[interface{}]int(*c)
-	d[key] = c.Get(key) + 1
+	d[key] = v
+}
+
+func (c *Counter) Increment(key interface{}) {
+	c.put(key, c.Get(key)+1)
+}
+
+func (c *Counter) Decrement(key interface{}) {
+	v := c.Get(key)
+	if v > 0 {
+		c.put(key, v-1)
+	}
 }
 
 func (c *Counter) Get(key interface{}) int {

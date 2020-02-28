@@ -14,6 +14,21 @@ func TestIncrementAndGet(t *testing.T) {
 	assert(t, c.Get(2), 2)
 }
 
+func TestDecrement(t *testing.T) {
+	c := NewCounter()
+	c.Increment(1)
+	c.Increment(1)
+
+	c.Decrement(1)
+	assert(t, c.Get(1), 1)
+
+	c.Decrement(1)
+	assert(t, c.Get(1), 0)
+
+	c.Decrement(1)
+	assert(t, c.Get(1), 0)
+}
+
 func TestKeys(t *testing.T) {
 	c := NewCounter()
 	c.Increment("1")

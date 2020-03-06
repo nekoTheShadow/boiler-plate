@@ -1,5 +1,10 @@
 package collections
 
+import (
+	"fmt"
+	"strings"
+)
+
 type Heapq struct {
 	elements []*element
 }
@@ -59,4 +64,16 @@ func (heapq *Heapq) Pop() interface{} {
 
 func (heapq *Heapq) isEmpty() bool {
 	return len(heapq.elements) == 1
+}
+
+func (heapq *Heapq) Size() int {
+	return len(heapq.elements) - 1
+}
+
+func (heapq *Heapq) String() string {
+	s := make([]string, len(heapq.elements)-1)
+	for i := 1; i < len(heapq.elements); i++ {
+		s[i-1] = fmt.Sprintf("%v", heapq.elements[i].v)
+	}
+	return strings.Join(s, " ")
 }

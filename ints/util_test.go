@@ -35,3 +35,23 @@ func TestCeilDiv(t *testing.T) {
 		}
 	}
 }
+
+func TestMax(t *testing.T) {
+	if Max(1) != 1 {
+		t.Errorf("Max(1): expected 1, actual %d", Max(1))
+	}
+
+	if Max(2, 3, 1) != 3 {
+		t.Errorf("Max(2,3,1): expected 3, actual %d", Max(2, 3, 1))
+	}
+}
+
+func TestMin(t *testing.T) {
+	if Min(1) != 1 {
+		t.Errorf("Min(1): expected 1, actual %d", Min(1))
+	}
+
+	if Min(2, 3, 1) != 1 {
+		t.Errorf("Min(2,3,1): expected 1, actual %d", Min(2, 3, 1))
+	}
+}

@@ -1,23 +1,21 @@
 package ints
 
-func Min(a ...int) int {
-	v := a[0]
-	for i := 1; i < len(a); i++ {
-		if a[i] < v {
-			v = a[i]
+func Min(a int, b ...int) int {
+	for _, v := range b {
+		if v < a {
+			a = v
 		}
 	}
-	return v
+	return a
 }
 
-func Max(a ...int) int {
-	v := a[0]
-	for i := 1; i < len(a); i++ {
-		if v < a[i] {
-			v = a[i]
+func Max(a int, b ...int) int {
+	for _, v := range b {
+		if a < v {
+			a = v
 		}
 	}
-	return v
+	return a
 }
 
 func Abs(x int) int {

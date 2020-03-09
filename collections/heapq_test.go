@@ -47,7 +47,7 @@ func TestHeapq(t *testing.T) {
 	}
 }
 
-func TestIsEmpty(t *testing.T) {
+func TestHeapqIsEmpty(t *testing.T) {
 	heapq := NewHeapq()
 	if !heapq.isEmpty() {
 		t.FailNow()

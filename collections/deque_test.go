@@ -2,7 +2,7 @@ package collections
 
 import "testing"
 
-func TestIsEmpty(t *testing.T) {
+func TestDequeIsEmpty(t *testing.T) {
 	d := NewDeque()
 	if !d.IsEmpty() {
 		t.FailNow()

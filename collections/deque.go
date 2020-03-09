@@ -12,6 +12,7 @@ func (d *Deque) AppendFirst(v interface{}) {
 	e := make([]interface{}, len(d.deque)+1)
 	copy(e[1:], d.deque)
 	d.deque = e
+	d.deque[0] = v
 }
 
 func (d *Deque) AppendLast(v interface{}) {

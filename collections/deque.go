@@ -1,45 +1,65 @@
 package collections
 
 type Deque struct {
-	deque []interface{}
+	head []interface{}
+	tail []interface{}
 }
 
 func NewDeque() *Deque {
-	return &Deque{deque: []interface{}{}}
-}
-
-func (d *Deque) AppendFirst(v interface{}) {
-	e := make([]interface{}, len(d.deque)+1)
-	copy(e[1:], d.deque)
-	d.deque = e
-	d.deque[0] = v
+	return &Deque{
+		head: []interface{}{},
+		tail: []interface{}{},
+	}
 }
 
 func (d *Deque) AppendLast(v interface{}) {
-	d.deque = append(d.deque, v)
+	d.tail = append(d.tail, v)
+}
+
+func (d *Deque) AppendFirst(v interface{}) {
+	d.head = append(d.head, v)
 }
 
 func (d *Deque) PopLast() interface{} {
-	n := len(d.deque)
-	v := d.deque[n-1]
-	d.deque = d.deque[0 : n-1]
-	return v
+	if len(d.tail) == 0 {
+		v := d.head[0]
+		d.head = d.head[1:]
+		return v
+	} else {
+		v := d.tail[len(d.tail)-1]
+		d.tail = d.tail[:len(d.tail)-1]
+		return v
+	}
 }
 
 func (d *Deque) PopFirst() interface{} {
-	v := d.deque[0]
-	d.deque = d.deque[1:]
-	return v
+	if len(d.head) == 0 {
+		v := d.tail[0]
+		d.tail = d.tail[1:]
+		return v
+	} else {
+		v := d.head[len(d.head)-1]
+		d.head = d.head[:len(d.head)-1]
+		return v
+	}
 }
 
 func (d *Deque) IsEmpty() bool {
-	return len(d.deque) == 0
+	return len(d.head) == 0 && len(d.tail) == 0
 }
 
 func (d *Deque) PeekFirst() interface{} {
-	return d.deque[0]
+	if len(d.head) == 0 {
+		return d.tail[0]
+	} else {
+		return d.head[len(d.head)-1]
+	}
 }
 
 func (d *Deque) PeekLast() interface{} {
-	return d.deque[len(d.deque)-1]
+	if len(d.tail) == 0 {
+		return d.head[0]
+	} else {
+		return d.tail[len(d.tail)-1]
+	}
 }

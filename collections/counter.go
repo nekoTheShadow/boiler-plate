@@ -35,7 +35,17 @@ func (c *Counter) Keys() []interface{} {
 	d := map[interface{}]int(*c)
 	keys := []interface{}{}
 	for key := range d {
-		keys = append(keys, key)
+		if c.Get(key) > 0 {
+			keys = append(keys, key)
+		}
 	}
 	return keys
+}
+
+func (c *Counter) String() string {
+	strs := []string{}
+	for _, key := range c.Keys() {
+		strs = append(strs, fmt.Sprintf("%v => %d", key, c.Get(key)))
+	}
+	return "[" + strings.Join(strs, ", ") + "]"
 }

@@ -1,4 +1,4 @@
-package collections
+package main
 
 // Binary Indexed Tree (1 based indexed)
 type BIT struct {

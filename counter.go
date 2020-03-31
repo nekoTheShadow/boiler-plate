@@ -1,4 +1,9 @@
-package collections
+package main
+
+import (
+	"fmt"
+	"strings"
+)
 
 type Counter map[interface{}]int
 

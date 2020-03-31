@@ -1,4 +1,4 @@
-package collections
+package main
 
 type UnionFind struct {
 	parents []int

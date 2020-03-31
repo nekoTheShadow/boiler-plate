@@ -1,4 +1,4 @@
-package collections
+package main
 
 type Deque struct {
 	head []interface{}

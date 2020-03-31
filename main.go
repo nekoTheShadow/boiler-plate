@@ -8,6 +8,8 @@ import (
 	"strconv"
 )
 
+const INFINITY = math.MaxInt64/2 - 1
+
 func exec(stdin *Stdin, stdout *Stdout) {
 
 }
@@ -25,7 +27,7 @@ type Stdin struct {
 func NewStdin(split bufio.SplitFunc) *Stdin {
 	s := Stdin{bufio.NewScanner(os.Stdin)}
 	s.stdin.Split(split)
-	s.stdin.Buffer(make([]byte, bufio.MaxScanTokenSize), int(math.MaxInt32))
+	s.stdin.Buffer(make([]byte, bufio.MaxScanTokenSize), INFINITY)
 	return &s
 }
 
@@ -58,4 +60,44 @@ func (s *Stdout) Flush() {
 
 func (s *Stdout) Println(a ...interface{}) {
 	fmt.Fprintln(s.stdout, a...)
+}
+
+func Min(a int, b ...int) int {
+	for _, v := range b {
+		if v < a {
+			a = v
+		}
+	}
+	return a
+}
+
+func Max(a int, b ...int) int {
+	for _, v := range b {
+		if a < v {
+			a = v
+		}
+	}
+	return a
+}
+
+func Abs(x int) int {
+	if x > 0 {
+		return x
+	} else {
+		return x * -1
+	}
+}
+
+func Pow(x, y int) int {
+	z := 1
+	for y > 0 {
+		if y%2 == 0 {
+			x *= x
+			y /= 2
+		} else {
+			z *= x
+			y -= 1
+		}
+	}
+	return z
 }

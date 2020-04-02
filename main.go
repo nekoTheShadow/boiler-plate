@@ -101,3 +101,11 @@ func Pow(x, y int) int {
 	}
 	return z
 }
+
+func CreateMatrix(x, y int) [][]int {
+	matrix := make([][]int, x)
+	for i := 0; i < y; i++ {
+		matrix[i] = make([]int, x)
+	}
+	return matrix
+}

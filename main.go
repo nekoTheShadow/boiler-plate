@@ -104,8 +104,8 @@ func Pow(x, y int) int {
 
 func CreateMatrix(x, y int) [][]int {
 	matrix := make([][]int, x)
-	for i := 0; i < y; i++ {
-		matrix[i] = make([]int, x)
+	for i := 0; i < x; i++ {
+		matrix[i] = make([]int, y)
 	}
 	return matrix
 }

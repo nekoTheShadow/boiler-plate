@@ -78,17 +78,53 @@ func LCS(s, t string) string {
 // [0..n) から r個選んだ組合せを生成する。
 // r < 0 の場合はすべての組合せを生成する。
 func Combinations(n int, r int) [][]int {
-	ans := [][]int{}
-	for x := uint(0); x < (uint(1) << uint(n)); x++ {
-		idxs := []int{}
-		for i := uint(0); i < uint(n); i++ {
-			if x&(uint(1)<<i) != 0 {
-				idxs = append(idxs, int(i))
+	a := [][]int{}
+	for i := uint(0); i < (1 << uint(n)); i++ {
+		b := []int{}
+		for j := uint(0); j < uint(n); j++ {
+			if i&(uint(1)<<j) != 0 {
+				b = append(b, int(j))
 			}
 		}
-		if r < 0 && len(idxs) == r {
-			ans = append(ans, idxs)
+
+		if r < 0 || len(b) == r {
+			a = append(a, b)
 		}
 	}
-	return ans
+	return a
+}
+
+// [0..n)の順列を生成する。
+func Permutations(n int) [][]int {
+	type e struct {
+		bit uint
+		a   []int
+	}
+
+	q := []*e{}
+	for i := 0; i < n; i++ {
+		q = append(q, &e{bit: 1 << uint(i), a: []int{i}})
+	}
+
+	p := [][]int{}
+	for x := 0; x < len(q); x++ {
+		cur := q[x]
+		if cur.bit == (1<<uint(n) - 1) {
+			p = append(p, cur.a)
+			continue
+		}
+
+		for i := 0; i < n; i++ {
+			if cur.bit&(1<<uint(i)) != 0 {
+				continue
+			}
+
+			m := len(cur.a) + 1
+			b := make([]int, m)
+			copy(b, cur.a)
+			b[m-1] = i
+			q = append(q, &e{bit: cur.bit | (1 << uint(i)), a: b})
+		}
+	}
+	return p
 }

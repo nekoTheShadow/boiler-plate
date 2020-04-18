@@ -46,6 +46,30 @@ func (s *Stdin) ReadFloat64() float64 {
 	return n
 }
 
+func (s *Stdin) ReadIntSlice(n int) []int {
+	a := make([]int, n)
+	for i := 0; i < n; i++ {
+		a[i] = s.ReadInt()
+	}
+	return a
+}
+
+func (s *Stdin) ReadStringSlice(n int) []string {
+	a := make([]string, n)
+	for i := 0; i < n; i++ {
+		a[i] = s.Read()
+	}
+	return a
+}
+
+func (s *Stdin) ReadFloat64Slice(n int) []float64 {
+	a := make([]float64, n)
+	for i := 0; i < n; i++ {
+		a[i] = s.ReadFloat64()
+	}
+	return a
+}
+
 type Stdout struct {
 	stdout *bufio.Writer
 }

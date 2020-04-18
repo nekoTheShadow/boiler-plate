@@ -1,5 +1,10 @@
 package main
 
+import (
+	"fmt"
+	"reflect"
+)
+
 func isPrime(x int) bool {
 	if x < 2 {
 		return false
@@ -127,4 +132,37 @@ func Permutations(n int) [][]int {
 		}
 	}
 	return p
+}
+
+func ReverseSlice(v interface{}) {
+	if reflect.TypeOf(v).Kind() == reflect.Slice {
+		slice := reflect.ValueOf(v)
+		for i1, n := 0, slice.Len(); i1 < n/2; i1++ {
+			i2 := n - i1 - 1
+			v1 := reflect.ValueOf(slice.Index(i1).Interface())
+			slice.Index(i1).Set(slice.Index(i2))
+			slice.Index(i2).Set(v1)
+		}
+	}
+}
+
+func ReverseString(s string) string {
+	t := []rune(s)
+	ReverseSlice(t)
+	return string(t)
+}
+
+func ToStringSlice(slice interface{}) []string {
+	// 本来はerrを返却すべき。 利用する側(=自分)は引数がsliceであることを知っている。
+	if reflect.TypeOf(slice).Kind() != reflect.Slice {
+		panic(fmt.Sprintf("%v is not slice", slice))
+	}
+
+	src := reflect.ValueOf(slice)
+	n := src.Len()
+	dst := make([]string, n)
+	for i := 0; i < n; i++ {
+		dst[i] = fmt.Sprintf("%v", src.Index(i))
+	}
+	return dst
 }

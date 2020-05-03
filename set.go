@@ -32,3 +32,7 @@ func (s *Set) Values() []interface{} {
 	}
 	return values
 }
+
+func (s *Set) Size() int {
+	return len(s.set)
+}

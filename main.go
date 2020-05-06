@@ -42,6 +42,11 @@ func (s *Stdin) ReadInt() int {
 	return n
 }
 
+func (s *Stdin) ReadInt64() int64 {
+	n, _ := strconv.ParseInt(s.Read(), 10, 64)
+	return n
+}
+
 func (s *Stdin) ReadFloat64() float64 {
 	n, _ := strconv.ParseFloat(s.Read(), 64)
 	return n
@@ -67,6 +72,14 @@ func (s *Stdin) ReadFloat64Slice(n int) []float64 {
 	a := make([]float64, n)
 	for i := 0; i < n; i++ {
 		a[i] = s.ReadFloat64()
+	}
+	return a
+}
+
+func (s *Stdin) ReadInt64Slice(n int) []int64 {
+	a := make([]int64, n)
+	for i := 0; i < n; i++ {
+		a[i] = s.ReadInt64()
 	}
 	return a
 }

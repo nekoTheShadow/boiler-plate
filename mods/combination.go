@@ -33,6 +33,10 @@ func H(n, r int) int {
 	return C(n+r-1, r)
 }
 
+func NoCacheH(n, r int) int {
+	return NoCacheC(n+r-1, r)
+}
+
 func NoCacheC(n, r int) int {
 	numer := 1
 	denom := 1

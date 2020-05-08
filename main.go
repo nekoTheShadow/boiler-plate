@@ -42,11 +42,6 @@ func (s *Stdin) ReadInt() int {
 	return n
 }
 
-func (s *Stdin) ReadInt64() int64 {
-	n, _ := strconv.ParseInt(s.Read(), 10, 64)
-	return n
-}
-
 func (s *Stdin) ReadFloat64() float64 {
 	n, _ := strconv.ParseFloat(s.Read(), 64)
 	return n
@@ -72,14 +67,6 @@ func (s *Stdin) ReadFloat64Slice(n int) []float64 {
 	a := make([]float64, n)
 	for i := 0; i < n; i++ {
 		a[i] = s.ReadFloat64()
-	}
-	return a
-}
-
-func (s *Stdin) ReadInt64Slice(n int) []int64 {
-	a := make([]int64, n)
-	for i := 0; i < n; i++ {
-		a[i] = s.ReadInt64()
 	}
 	return a
 }
@@ -300,89 +287,4 @@ func ToStringSlice(slice interface{}) []string {
 		dst[i] = fmt.Sprintf("%v", src.Index(i))
 	}
 	return dst
-}
-
-func CreateMatrix(x, y int) [][]int {
-	matrix := make([][]int, x)
-	for i := 0; i < x; i++ {
-		matrix[i] = make([]int, y)
-	}
-	return matrix
-}
-
-func Min64(a int64, b ...int64) int64 {
-	for _, v := range b {
-		if v < a {
-			a = v
-		}
-	}
-	return a
-}
-
-func Max64(a int64, b ...int64) int64 {
-	for _, v := range b {
-		if a < v {
-			a = v
-		}
-	}
-	return a
-}
-
-func Abs64(x int64) int64 {
-	if x > 0 {
-		return x
-	} else {
-		return x * -1
-	}
-}
-
-func Pow64(x, y int64) int64 {
-	z := int64(1)
-	for y > 0 {
-		if y%2 == 0 {
-			x *= x
-			y /= 2
-		} else {
-			z *= x
-			y--
-		}
-	}
-	return z
-}
-
-func IsPrime64(x int64) bool {
-	if x < 2 {
-		return false
-	}
-
-	for i := int64(2); i*i <= x; i++ {
-		if x%i == 0 {
-			return false
-		}
-	}
-	return true
-}
-
-func Gcd64(x, y int64) int64 {
-	if x < y {
-		x, y = y, x
-	}
-
-	for y > 0 {
-		x, y = y, x%y
-	}
-
-	return x
-}
-
-func Lcm64(x, y int64) int64 {
-	return x * y / Gcd64(x, y)
-}
-
-func CeilDiv64(x, y int64) int64 {
-	if x%y == 0 {
-		return x / y
-	} else {
-		return x/y + 1
-	}
 }

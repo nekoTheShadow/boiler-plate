@@ -1,4 +1,4 @@
-package mods
+package codeforces
 
 var MOD = int64(1000000007)
 

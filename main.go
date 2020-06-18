@@ -140,6 +140,56 @@ func IsPrime(x int) bool {
 	return true
 }
 
+// 2以上n未満の素数を列挙する
+func Primes(n int) []int {
+	isprime := make([]bool, n)
+	for i := 2; i < n; i++ {
+		isprime[i] = true
+	}
+
+	for i := 2; i*i <= n; i++ {
+		if !isprime[i] {
+			continue
+		}
+
+		for j := i + i; j < n; j += i {
+			isprime[j] = false
+		}
+	}
+
+	primes := []int{}
+	for i := 2; i < n; i++ {
+		if isprime[i] {
+			primes = append(primes, i)
+		}
+	}
+	return primes
+}
+
+// nを素因数分解する。
+// 結果 ... key=素因数 value=数
+func PrimeDivision(n int) map[int]int {
+	d := map[int]int{}
+	for i := 2; i*i <= n; i++ {
+		for n%i == 0 {
+			if _, ok := d[i]; !ok {
+				d[i] = 0
+			}
+			d[i]++
+			n /= i
+		}
+	}
+
+	if n > 1 {
+		if v, ok := d[n]; ok {
+			d[n] = v + 1
+		} else {
+			d[n] = 1
+		}
+	}
+	return d
+}
+
 func Gcd(x, y int) int {
 	if x < y {
 		x, y = y, x

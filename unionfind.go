@@ -2,13 +2,16 @@ package main
 
 type UnionFind struct {
 	parents []int
+	sizes   []int
 }
 
 func NewUnionFind(n int) *UnionFind {
 	uf := UnionFind{}
-	uf.parents = []int{}
+	uf.parents = make([]int, n)
+	uf.sizes = make([]int, n)
 	for i := 0; i < n; i++ {
-		uf.parents = append(uf.parents, i)
+		uf.parents[i] = i
+		uf.sizes[i] = 0
 	}
 	return &uf
 }
@@ -25,7 +28,19 @@ func (uf *UnionFind) Find(x int) int {
 func (uf *UnionFind) Union(x, y int) {
 	x = uf.Find(x)
 	y = uf.Find(y)
-	if x != y {
-		uf.parents[y] = x
+	if x == y {
+		return
 	}
+
+	if uf.sizes[x] < uf.sizes[y] {
+		uf.parents[x] = y
+		uf.sizes[y] += uf.sizes[x]
+	} else {
+		uf.parents[y] = x
+		uf.sizes[x] += uf.sizes[y]
+	}
+}
+
+func (uf *UnionFind) Size(n int) int {
+	return uf.sizes[uf.Find(n)]
 }

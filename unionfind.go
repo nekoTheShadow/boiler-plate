@@ -1,26 +1,22 @@
 package main
 
 type UnionFind struct {
-	parents []int
-	sizes   []int
+	parents map[int]int
+	sizes   map[int]int
 }
 
 func NewUnionFind(n int) *UnionFind {
-	uf := UnionFind{}
-	uf.parents = make([]int, n)
-	uf.sizes = make([]int, n)
-	for i := 0; i < n; i++ {
-		uf.parents[i] = i
-		uf.sizes[i] = 0
+	uf := UnionFind{
+		parents: map[int]int{},
+		sizes:   map[int]int{},
 	}
 	return &uf
 }
 
 func (uf *UnionFind) Find(x int) int {
-	if uf.parents[x] == x {
+	if _, ok := uf.parents[x]; !ok {
 		return x
 	}
-
 	uf.parents[x] = uf.Find(uf.parents[x])
 	return uf.parents[x]
 }
@@ -32,6 +28,13 @@ func (uf *UnionFind) Union(x, y int) {
 		return
 	}
 
+	if _, ok := uf.sizes[x]; !ok {
+		uf.sizes[x] = 1
+	}
+	if _, ok := uf.sizes[y]; !ok {
+		uf.sizes[y] = 1
+	}
+
 	if uf.sizes[x] < uf.sizes[y] {
 		uf.parents[x] = y
 		uf.sizes[y] += uf.sizes[x]
@@ -41,6 +44,10 @@ func (uf *UnionFind) Union(x, y int) {
 	}
 }
 
-func (uf *UnionFind) Size(n int) int {
-	return uf.sizes[uf.Find(n)]
+func (uf *UnionFind) Size(x int) int {
+	x = uf.Find(x)
+	if _, ok := uf.sizes[x]; !ok {
+		uf.sizes[x] = 1
+	}
+	return uf.sizes[x]
 }
